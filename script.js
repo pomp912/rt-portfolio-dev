@@ -66,6 +66,19 @@ themeToggle?.addEventListener('click', () => {
 });
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const welcomeOverlay = document.getElementById('welcome-overlay');
+const welcomeToast = document.getElementById('welcome-toast');
+
+if (welcomeOverlay && welcomeToast) {
+  welcomeOverlay.hidden = false;
+  window.setTimeout(() => {
+    welcomeOverlay.classList.add('is-leaving');
+    window.setTimeout(() => {
+      welcomeOverlay.hidden = true;
+    }, reduceMotion.matches ? 0 : 520);
+  }, 2800);
+}
+
 const revealElements = [...document.querySelectorAll('[data-reveal]')];
 
 if (reduceMotion.matches || !('IntersectionObserver' in window)) {
